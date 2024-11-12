@@ -14,9 +14,22 @@ import {
   Container,
   Box,
   Button,
-  Avatar
+  Avatar,
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+import { styled } from '@mui/material/styles';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.common.white,
+  fontWeight: 'bold',
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+}));
 
 const TaskList = () => {
   const tasks = getTasks();
@@ -31,23 +44,23 @@ const TaskList = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Task</TableCell>
-                <TableCell>Username</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>First Name</TableCell>
-                <TableCell>Last Name</TableCell>
-                <TableCell>Address</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Department</TableCell>
-                <TableCell>Position</TableCell>
-                <TableCell>Start Date</TableCell>
-                <TableCell>Image</TableCell>
-                <TableCell align="right">Actions</TableCell>
+                <StyledTableCell>Task</StyledTableCell>
+                <StyledTableCell>Username</StyledTableCell>
+                <StyledTableCell>Email</StyledTableCell>
+                <StyledTableCell>First Name</StyledTableCell>
+                <StyledTableCell>Last Name</StyledTableCell>
+                <StyledTableCell>Address</StyledTableCell>
+                <StyledTableCell>Phone</StyledTableCell>
+                <StyledTableCell>Department</StyledTableCell>
+                <StyledTableCell>Position</StyledTableCell>
+                <StyledTableCell>Start Date</StyledTableCell>
+                <StyledTableCell>Image</StyledTableCell>
+                <StyledTableCell align="right">Actions</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {tasks.map((task, index) => (
-                <TableRow key={index}>
+                <StyledTableRow key={index}>
                   <TableCell>{task.task}</TableCell>
                   <TableCell>{task.username}</TableCell>
                   <TableCell>{task.email}</TableCell>
@@ -69,7 +82,7 @@ const TaskList = () => {
                       <Delete />
                     </IconButton>
                   </TableCell>
-                </TableRow>
+                </StyledTableRow>
               ))}
             </TableBody>
           </Table>
