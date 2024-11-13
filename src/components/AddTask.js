@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { addTask } from '../data';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { addTask } from "../data";
 import {
   TextField,
   Button,
@@ -10,21 +10,21 @@ import {
   Box,
   Input,
   Avatar,
-} from '@mui/material';
+} from "@mui/material";
 
 const AddTask = () => {
   const [form, setForm] = useState({
-    username: '',
-    email: '',
-    task: '',
-    firstName: '',
-    lastName: '',
-    address: '',
-    phone: '',
-    department: '',
-    position: '',
-    startDate: '',
-    image: null
+    username: "",
+    email: "",
+    task: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    phone: "",
+    department: "",
+    position: "",
+    startDate: "",
+    image: null,
   });
 
   const navigate = useNavigate();
@@ -45,13 +45,13 @@ const AddTask = () => {
     reader.onload = () => {
       const newTask = { ...form, image: reader.result };
       addTask(newTask);
-      navigate('/');
+      navigate("/");
     };
     if (form.image) {
       reader.readAsDataURL(form.image);
     } else {
       addTask(form);
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -167,16 +167,13 @@ const AddTask = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button
-                variant="contained"
-                component="label"
-              >
+              <Button variant="contained" component="label">
                 Upload Image
                 <Input
                   type="file"
                   hidden
                   onChange={handleImageChange}
-                  inputProps={{ accept: 'image/*' }}
+                  inputProps={{ accept: "image/*" }}
                 />
               </Button>
               {form.image && (
@@ -187,7 +184,12 @@ const AddTask = () => {
               )}
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
                 Add Task
               </Button>
             </Grid>

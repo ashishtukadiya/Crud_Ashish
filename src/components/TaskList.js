@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { getTasks, deleteTask } from '../data';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { getTasks, deleteTask } from "../data";
 import {
   Table,
   TableBody,
@@ -15,24 +15,30 @@ import {
   Box,
   Button,
   Avatar,
-} from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
+} from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.common.white,
-  fontWeight: 'bold',
+  fontWeight: "bold",
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
 }));
 
 const TaskList = () => {
-  const tasks = getTasks();
+  const [tasks, setTasks] = useState(getTasks());
+
+  const handleDelete = (index) => {
+    deleteTask(index);
+
+    setTasks(tasks.filter((_, taskIndex) => taskIndex !== index));
+  };
 
   return (
     <Container maxWidth="md">
@@ -72,13 +78,15 @@ const TaskList = () => {
                   <TableCell>{task.position}</TableCell>
                   <TableCell>{task.startDate}</TableCell>
                   <TableCell>
-                    {task.image && <Avatar src={task.image} alt={task.username} />}
+                    {task.image && (
+                      <Avatar src={task.image} alt={task.username} />
+                    )}
                   </TableCell>
                   <TableCell align="right">
                     <IconButton component={Link} to={`/edit/${index}`}>
                       <Edit />
                     </IconButton>
-                    <IconButton onClick={() => deleteTask(index)}>
+                    <IconButton onClick={() => handleDelete(index)}>
                       <Delete />
                     </IconButton>
                   </TableCell>

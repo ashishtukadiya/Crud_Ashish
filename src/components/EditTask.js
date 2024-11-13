@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getTask, updateTask } from '../data';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getTask, updateTask } from "../data";
 import {
   TextField,
   Button,
@@ -10,23 +10,23 @@ import {
   Box,
   Input,
   Avatar,
-} from '@mui/material';
+} from "@mui/material";
 
 const EditTask = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    username: '',
-    email: '',
-    task: '',
-    firstName: '',
-    lastName: '',
-    address: '',
-    phone: '',
-    department: '',
-    position: '',
-    startDate: '',
-    image: null
+    username: "",
+    email: "",
+    task: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    phone: "",
+    department: "",
+    position: "",
+    startDate: "",
+    image: null,
   });
 
   useEffect(() => {
@@ -52,13 +52,13 @@ const EditTask = () => {
     reader.onload = () => {
       const updatedTask = { ...form, image: reader.result };
       updateTask(id, updatedTask);
-      navigate('/');
+      navigate("/");
     };
     if (form.image) {
       reader.readAsDataURL(form.image);
     } else {
       updateTask(id, form);
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -174,27 +174,33 @@ const EditTask = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button
-                variant="contained"
-                component="label"
-              >
+              <Button variant="contained" component="label">
                 Upload Image
                 <Input
                   type="file"
                   hidden
                   onChange={handleImageChange}
-                  inputProps={{ accept: 'image/*' }}
+                  inputProps={{ accept: "image/*" }}
                 />
               </Button>
               {form.image && (
                 <Avatar
-                  src={typeof form.image === 'string' ? form.image : URL.createObjectURL(form.image)}
+                  src={
+                    typeof form.image === "string"
+                      ? form.image
+                      : URL.createObjectURL(form.image)
+                  }
                   sx={{ width: 56, height: 56, mt: 2 }}
                 />
               )}
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
                 Update Task
               </Button>
             </Grid>
